@@ -66,8 +66,12 @@ public class ReadNDraw {
         int secondAmount = 2;
         int thirdAmount = 3;
 
-        while (firstPlace.size() < firstAmount &&
-                secondPlace.size() < secondAmount &&
+        firstPlace.clear();
+        secondPlace.clear();
+        thirdPlace.clear();
+
+        while (firstPlace.size() < firstAmount ||
+                secondPlace.size() < secondAmount ||
                 thirdPlace.size() < thirdAmount) {
             for (int id : members.keySet()) {
                 Member member = members.get(id);
@@ -113,7 +117,6 @@ public class ReadNDraw {
                 "】【" + members.get(thirdPlace.get(1)).getID() + "】，【" + members.get(thirdPlace.get(2)).getName() +
                 "】【" + members.get(thirdPlace.get(2)).getID() + "】");
         System.out.println("Congratulations!*★,°*:.☆(￣▽￣)/$:*.°★* 。");
-
     }
 
     private void reLottery(ArrayList<Integer> targetMembers, int limit) {
@@ -151,5 +154,29 @@ public class ReadNDraw {
 
         targetMembers.clear();
         targetMembers.addAll(ans);
+    }
+
+    public ArrayList<Member> getPrizedMember(int placeNum) {
+        ArrayList<Member> ans = new ArrayList<>();
+        switch (placeNum) {
+            case 1:
+                for (int id : firstPlace) {
+                    ans.add(members.get(id));
+                }
+                break;
+            case 2:
+                for (int id : secondPlace) {
+                    ans.add(members.get(id));
+                }
+                break;
+            case 3:
+                for (int id : thirdPlace) {
+                    ans.add(members.get(id));
+                }
+                break;
+            default:
+                break;
+        }
+        return ans;
     }
 }
