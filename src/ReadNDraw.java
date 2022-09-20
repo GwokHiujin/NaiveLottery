@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * @author guoyan
+ * @author gwokhjin
  */
 public class ReadNDraw {
     private final ArrayList<Integer> ids;
@@ -15,17 +15,20 @@ public class ReadNDraw {
 
     /* Weight Settings */
 
-    private int FP_FW = 15, FP_SW = 39, FP_TW = 50;
+    private int FP_FW = 20, FP_SW = 45, FP_TW = 63;
     private int SP_FW = 10, SP_SW = 25, SP_TW = 43;
     private int TP_FW = 5, TP_SW = 13, TP_TW = 33;
     private int OP_FW = 1, OP_SW = 5, OP_TW = 15;
     private int OW = 100;
 
-    private int RE_OW = 2, RE_TW = 6, RE_SW = 14, RE_FW = 30;
+    private int RE_OW = 2, RE_TW = 10, RE_SW = 24, RE_FW = 50;
+
+    private int luckyNum = 5;
 
     private final ArrayList<Integer> firstPlace = new ArrayList<>();
     private final ArrayList<Integer> secondPlace = new ArrayList<>();
     private final ArrayList<Integer> thirdPlace = new ArrayList<>();
+    private final ArrayList<Integer> luckyPlace = new ArrayList<>();
 
     public ReadNDraw() {
         ids = new ArrayList<>();
@@ -70,6 +73,15 @@ public class ReadNDraw {
         secondPlace.clear();
         thirdPlace.clear();
 
+        /* Choose Lucky Prize */
+        for (int i = 0; i < luckyNum; i++) {
+            int luckyP = (int) (Math.random() * ids.size());
+            members.get(ids.get(luckyP)).setLuckyPlace(5);
+            luckyPlace.add(ids.get(luckyP));
+        }
+
+        /* Choose Ordinary Prize */
+
         while (firstPlace.size() < firstAmount ||
                 secondPlace.size() < secondAmount ||
                 thirdPlace.size() < thirdAmount) {
@@ -106,6 +118,8 @@ public class ReadNDraw {
             reLottery(thirdPlace, 3);
         }
 
+
+
         System.out.println("=============== 抽奖结束 ===============");
         System.out.println("获得一等奖的同学是：【" + members.get(firstPlace.get(0)).getName() +
                 "】【" + members.get(firstPlace.get(0)).getID() + "】");
@@ -116,6 +130,10 @@ public class ReadNDraw {
                 "】【" + members.get(thirdPlace.get(0)).getID() + "】，【" + members.get(thirdPlace.get(1)).getName() +
                 "】【" + members.get(thirdPlace.get(1)).getID() + "】，【" + members.get(thirdPlace.get(2)).getName() +
                 "】【" + members.get(thirdPlace.get(2)).getID() + "】");
+        System.out.println("获得幸运奖的同学是：");
+        for (int i = 0; i < luckyNum; i++) {
+            System.out.println("【" + members.get(luckyPlace.get(i)).getName() + "】【" + members.get(luckyPlace.get(i)).getID() + "】");
+        }
         System.out.println("Congratulations!*★,°*:.☆(￣▽￣)/$:*.°★* 。");
     }
 

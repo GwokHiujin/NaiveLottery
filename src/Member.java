@@ -44,4 +44,8 @@ public class Member {
     public int getOriginPlace() {
         return originPlace;
     }
+
+    public void setLuckyPlace(int luckyPlace) {
+        lotteryPlace = luckyPlace;
+    }
 }
